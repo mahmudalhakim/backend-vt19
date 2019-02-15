@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', '1');
+error_reporting(E_ALL);
+
 $to      = 'mahmud@example.com';
 $subject = 'The subject';
 $message = 'Hello message from PHP mail. ';
