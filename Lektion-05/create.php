@@ -19,7 +19,7 @@
   </div>
 
   <div class="col-md-4">
-    <input type="text" required
+    <input type="tel" required
            class="form-control mt-2" 
            placeholder="Ange telefon/mobil"
            name="tel">
@@ -27,7 +27,7 @@
 
   <div class="col-md-4">
     <input type="submit" 
-          class="form-control mt-2 btn btn-outline-primary" 
+          class="form-control my-2 btn btn-outline-primary" 
           value="Lägg till">
   </div>
 
@@ -40,10 +40,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'):
     // Hämta värden (values) från olika input-fält
     $name = $_POST['name'];
     $tel  = $_POST['tel'];
+   
+    // Rensa data
+    $name = filter_var($name, FILTER_SANITIZE_STRING);
+    $tel  = filter_var($tel , FILTER_SANITIZE_STRING);
+    
     // Validera data (Backend validering)
     if(empty($name) OR empty($tel)){
-        echo "<h2>Namn eller telefon får inte vara tomt!";
-    }else
+        echo "<h2>Namn eller telefon får inte vara tomt!</h2>";
+    }
+    elseif(strlen($name) < 3){
+      echo '<div class="alert alert-danger">
+            Namnet måste vara mer än 2 tecken
+            </div>';
+
+    }
+    else
     {  
         // Logga in i databasen
         require_once 'db.php';

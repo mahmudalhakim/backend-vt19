@@ -1,7 +1,7 @@
 <?php
 /* **********************************
 *
-*             UPDATE
+*             DELETE
 *
 *************************************/
 
@@ -38,29 +38,28 @@ $stmt->execute();
 if($stmt->rowCount() == 1):
    // echo "<h2>Det finns en rad i databasen!</h2>";
    $row = $stmt->fetch(PDO::FETCH_ASSOC);
-   $name = $row['name'];
-   $tel  = $row['tel'];
+   $name = htmlentities($row['name']);
+   $tel  = htmlentities($row['tel']);
 
-   // Nu har vi fått all info som behövs för att uppdatera en post
-   // Visa sidhuvud och skapa ett formulär
+   // Nu har vi fått all info som behövs för att ta bort en post
+   // Visa sidhuvud och ett formulär för att bekräfta
    require_once 'header.php';
 ?>
 
-<h2 class="text-center">Uppdatera</h2>
+<h2 class="text-center text-danger">Vill du ta bort följande kontakt?</h2>
 
-<form action="?id=<?php echo $id; ?>" method="POST">
-<!-- Du kan skicka id i en GET-variabel via action -->
+<form action="#" method="POST">
 
 <div class="form-row">
   <div class="col-md-6 offset-md-3">
-    <input type="text" required
+    <input type="text" required disabled
            class="form-control mt-2" 
            value="<?php echo $name ?>"
            name="name"> 
   </div>
 
   <div class="col-md-6 offset-md-3">
-    <input type="text" required
+    <input type="text" required disabled
            class="form-control mt-2" 
            value="<?php echo $tel ?>"
            name="tel">
@@ -68,14 +67,21 @@ if($stmt->rowCount() == 1):
 
   <div class="col-md-6 offset-md-3">
     <input type="submit" 
-           class="form-control mt-2 btn btn-outline-warning" 
-           value="Uppdatera">
+           class="form-control mt-2 btn btn-outline-danger" 
+           name="delete"
+           value="Radera">
+  </div>
+  
+  <div class="col-md-6 offset-md-3">
+    <input type="submit" 
+           class="form-control mt-2 btn btn-outline-dark" 
+           name="cancel"
+           value="Avbryt">
   </div>
 
 </div> <!-- form-row -->
 
-<!-- Du kan också skicka id i en POST-variabel
-     via en hidden-field. Jämför med rad 48 -->
+<!-- Skikca id via en hidden-filed (säkrare) -->
 <input type="hidden" name="id" value="<?php echo $id; ?>">
 
 </form>
@@ -103,33 +109,22 @@ endif;
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'):
    
+    // Vid avbryt gå till startsidan
+    if(isset($_POST['cancel'])){
+        header('Location: index.php');
+        return;
+    }
+
     // Logga in i databasen
     require_once 'db.php';
 
     // Förbered en SQL-sats
-    $stmt = $conn->prepare("UPDATE contacts 
-                            SET name= :name , tel= :tel
+    $stmt = $conn->prepare("DELETE FROM contacts 
                             WHERE id= :id ");
 
-    $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
-    $tel  = filter_var($_POST['tel'], FILTER_SANITIZE_STRING);
-    $id   = filter_var($_POST['id'], FILTER_SANITIZE_STRING);
-    // id hämtas via POST, se rad 79
-    
-    // Du kan testa att skriva ut id. 
-    echo "<h1>ID via POST: $id</h1>";
-
-    // eller hämta id via GET, se rad 48
-    $id   = $_GET['id']; 
-    echo "<h1>ID via GET: $id</h1>";  
-
-    // OBS! funktionen die() avslutar skriptet 
-    // Bortkommentera för att testa ovanstående utskrifter
-    // die();
+    $id   = $_POST['id']; // hämtas via POST, se rad 74
 
     // Binda params
-    $stmt->bindParam(':name' , $name);
-    $stmt->bindParam(':tel'  , $tel);
     $stmt->bindParam(':id'   , $id);
 
     // Kör SQL

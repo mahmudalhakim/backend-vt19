@@ -7,7 +7,7 @@
 
 // Visar felmeddelanden och varningar
 // OBS! Bara vid development
-require_once 'debug.php';
+// require_once 'debug.php';
 
 // Sidhuvud
 require_once 'header.php';

@@ -7,4 +7,8 @@
     <title>Mahmuds Telefonlista</title>
   </head>
   <body class="container">
-    <h1 class="text-center">Mahmuds Telefonlista</h1>
+    <h1 class="text-center">
+    <a href="index.php">
+    Mahmuds Telefonlista
+    </a>
+    </h1>
