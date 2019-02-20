@@ -1,0 +1,40 @@
+<?php
+/* **********************************
+*
+*             READ
+*
+*************************************/
+
+// 1. Logga in i databasen
+require_once 'db.php';
+
+// 2. Förbered en SQL-sats
+$stmt = $conn->prepare("SELECT * FROM contacts");
+
+// 3. Kör SQL
+$stmt->execute();
+
+// 4. Skapa en HTML-tabell
+$table = '<table class="table">';
+$table .= '<tr><th>Namn</th><th>Telefon</th><th>Admin</th></tr>';
+while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+    // $table .= var_dump($row);
+    // $table .= print_r($row);
+    $name = $row['name'];
+    $tel = $row['tel'];
+    $id = $row['id'];
+
+    $table .= "<tr>
+                  <td>$name</td>
+                  <td>$tel</td>
+                  <td><a href='update.php?id=$id' 
+                         class='btn btn-outline-info'>
+                        Uppdatera   
+                      </a>
+                  </td>
+               </tr>";
+} // while
+$table .= '</table>';
+
+// Skriv ut tabellen
+echo $table;
