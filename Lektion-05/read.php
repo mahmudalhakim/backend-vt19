@@ -15,7 +15,7 @@ $stmt = $conn->prepare("SELECT * FROM contacts");
 $stmt->execute();
 
 // 4. Skapa en HTML-tabell
-$table = '<table class="table table-hover table-sm">';
+$table = '<div class="table-height"><table class="table table-hover table-sm">';
 $table .= '<tr class="table-info"><th>Namn</th><th>Telefon</th><th class="text-center">Admin</th></tr>';
 while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
     // $table .= var_dump($row);
@@ -40,7 +40,7 @@ while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
                   </td>
                </tr>";
 } // while
-$table .= '</table>';
+$table .= '</table></div>';
 
 // Skriv ut tabellen
 echo $table;
