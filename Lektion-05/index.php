@@ -12,7 +12,8 @@
 // Sidhuvud
 require_once 'header.php';
 
-// Visa ett formulär och skapa en ny post (rad) i databasen
+// Visa ett formulär och 
+// skapa en ny post (rad) i databasen
 require_once 'create.php';
 
 // Visa en tabell över alla kontakter

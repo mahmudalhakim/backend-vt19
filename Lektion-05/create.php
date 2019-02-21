@@ -58,10 +58,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'):
     }
     else
     {  
-        // Logga in i databasen
+        // 1. Logga in i databasen
         require_once 'db.php';
 
-        // Förbered en SQL-sats
+        // 2. Förbered en SQL-sats
         $stmt = $conn->prepare("INSERT INTO contacts (name,tel) 
                                 VALUES (:name, :tel) ");
 
@@ -69,7 +69,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'):
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':tel' , $tel);
 
-        // Skicka SQL till databasen
+        // 3. Skicka SQL till databasen
         $stmt->execute(); 
 
     } // Avlusta if som validerar data

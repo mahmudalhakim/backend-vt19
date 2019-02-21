@@ -117,15 +117,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'):
     // id hämtas via POST, se rad 79
     
     // Du kan testa att skriva ut id. 
-    echo "<h1>ID via POST: $id</h1>";
+    // echo "<h1>ID via POST: $id</h1>";
 
     // eller hämta id via GET, se rad 48
-    $id   = $_GET['id']; 
-    echo "<h1>ID via GET: $id</h1>";  
+    // $id   = $_GET['id']; 
+    // echo "<h1>ID via GET: $id</h1>";  
 
     // OBS! funktionen die() avslutar skriptet 
     // Bortkommentera för att testa ovanstående utskrifter
-    // die();
+    //  die();
 
     // Binda params
     $stmt->bindParam(':name' , $name);
