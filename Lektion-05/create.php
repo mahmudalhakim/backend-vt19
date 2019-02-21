@@ -47,7 +47,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'):
     
     // Validera data (Backend validering)
     if(empty($name) OR empty($tel)){
-        echo "<h2>Namn eller telefon får inte vara tomt!</h2>";
+        echo '<div class="alert alert-danger">
+        Namn eller telefon får inte vara tomt!</div>';
     }
     elseif(strlen($name) < 3){
       echo '<div class="alert alert-danger">
