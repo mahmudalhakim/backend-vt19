@@ -23,10 +23,12 @@ include_once 'header.php';
 // Om id finns i URlen kommer vi hit
 // Men vi måste rensa id för att undvika XSS-Attacker
 // Testa följane URLen i olika webbläsare
-// order.php?id=<script>location="https://geekprank.com/hacker/"</script>
+// order-form.php?id=<script>location="https://geekprank.com/hacker/"</script>
 
 // Hämta id från URLen 
 $id = $_GET['id'];
+
+
 // echo "<h1>$id</h1><hr>";;
 
 // Rensa specialtecken med htmlspecialchars()

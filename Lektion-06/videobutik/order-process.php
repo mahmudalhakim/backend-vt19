@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'):
          $postnummer = $row['postnummer'];
          $ort        = $row['ort'];
         
-        // Skicka beställningen till tabellen uthyrning
+        // Skicka beställningen till tabellen orders
         $sql= "INSERT INTO orders (film, kund, datum, pris)
                VALUES (:filmid, :kundnummer, CURRENT_TIMESTAMP, :pris)";
 
