@@ -73,5 +73,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'):
         $stmt->execute(); 
 
     } // Avlusta if som validerar data
+  
+
+// Redirect to this page.
+// Varför?
+// https://stackoverflow.com/questions/4142809/simple-post-redirect-get-code-example
+// Bra att läsa
+// https://en.wikipedia.org/wiki/Post/Redirect/Get 
+header("Location: " . $_SERVER['REQUEST_URI']);
+exit();
+ 
 
 endif; // REQUEST_METHOD
